@@ -1,0 +1,200 @@
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <form id="filter">
+                <div class="col-md-3">
+                    <p class="lead">Shop Name</p>
+                    <br/>
+                    <br/>
+                    <h4>Delars City</h4>
+                      <div class="list-group">
+                        <% Delar.all.map(&:city).select{|c| c.present?}.uniq.compact.each do |city| %>
+                            <li class="list-group-item">
+                              <input type="checkbox" name="delar_city[]" value="<%= city %>"> <span><%= city %></span>
+                            </li>
+                        <% end %>
+                      </div>
+                      <h4>BRAND</h4>
+            <div class="list-group">
+              <% @mobiles.map(&:brand_name).select{|c| c.present?}.uniq.compact.each do |brand_name| %>
+                  <li class="list-group-item">
+                    <input type="checkbox" name="mobile[brand_name][]" value="<%= brand_name %>"> <span><%= brand_name %></span>
+                  </li>
+              <% end %>
+            </div>
+
+          <h4>MOBILE TYPE</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:mobile_type).select{|c| c.present?}.uniq.compact.each do |mobile_type| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[mobile_type][]" value="<%= mobile_type %>"> <span><%= mobile_type %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>BATTERY CAPACITY</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:battery_capacity).select{|c| c.present?}.uniq.compact.each do |battery_capacity| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[battery_capacity][]" value="<%= battery_capacity %>"> <span><%= battery_capacity %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>SCREEN SIZE</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:screen_size).select{|c| c.present?}.uniq.compact.each do |screen_size| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[screen_size][]" value="<%= screen_size %>"> <span><%= screen_size %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>RAM</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:ram).select{|c| c.present?}.uniq.compact.each do |ram| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[ram][]" value="<%= ram %>"> <span><%= ram %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>SIM TYPE</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:sim_type).select{|c| c.present?}.uniq.compact.each do |sim_type| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[sim_type][]" value="<%= sim_type %>"> <span><%= sim_type %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>PRIMARY CAMERA</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:primary_camera).select{|c| c.present?}.uniq.compact.each do |primary_camera| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[primary_camera][]" value="<%= primary_camera %>"> <span><%= primary_camera %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>OS VERSION NAME</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:os_version_name).select{|c| c.present?}.uniq.compact.each do |os_version_name| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[os_version_name][]" value="<%= os_version_name %>"> <span><%= os_version_name %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>SECONDARY CAMERA</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:secondary_camera).select{|c| c.present?}.uniq.compact.each do |secondary_camera| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[secondary_camera][]" value="<%= secondary_camera %>"> <span><%= secondary_camera %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>FEATURES</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:features).select{|c| c.present?}.uniq.compact.each do |features| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[features][]" value="<%= features %>"> <span><%= features %></span>
+                </li>
+            <% end %>
+          </div>
+
+          <h4>NUMBER OF CORES</h4>
+          <div class="list-group">
+            <% @mobiles.map(&:number_of_cores).select{|c| c.present?}.uniq.each do |number_of_cores| %>
+                <li class="list-group-item">
+                  <input type="checkbox" name="mobile[number_of_cores][]" value="<%= number_of_cores %>"> <span><%= number_of_cores %></span>
+                </li>
+            <% end %>
+          </div>  
+                </div>
+            </form>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                            <% @slider_mobiles.each_with_index do |mobile, i| %>
+                                <div class="item <%= 'active' if i == 0 %>">
+                                     <%= link_to image_tag(mobile.image.url(:medium)), view_mobile_path(mobile.id, mobile.mobile_name) %>
+                                </div>
+                            <% end %>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row" id="thumb-mobile">
+                    <% @mobiles.each do |mobile| %>
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                <%= link_to image_tag(mobile.image.url(:thumb)), view_mobile_path(mobile.id, mobile.mobile_name) %>
+                                <div class="caption">
+                                    <h4 class="pull-right">Rs.<%= mobile.price %></h4>
+      <h4><a href="<%= view_mobile_path(mobile.id, mobile.mobile_name) %>" class="caption-title"><%= mobile.mobile_name %></a>
+                                </div>                               
+                            </div>
+                        </div>
+                    <% end %>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2017</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+<script type="text/javascript">
+  $('form input').on('change', function(){
+      var data = $('form').serialize();
+      $.ajax({
+          url: '/',
+          data: data,
+          processData: false,
+          type: 'GET',
+          success: function ( data ) {
+              console.log(data);
+              $('#thumb-mobile').html(data);
+          }
+      });
+  });
+</script>
